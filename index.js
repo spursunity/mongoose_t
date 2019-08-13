@@ -1,7 +1,8 @@
-const mongoose = require('./config.js')();
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('iiiiiiiu');
-});
+(function m() {
+  try {
+    const mongooseConnect = require('./config');
+    mongooseConnect();
+  } catch (e) {
+    console.log(e);
+  }
+})()

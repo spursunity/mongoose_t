@@ -1,8 +1,13 @@
-function mongoose() {
-  const m = require('mongoose');
-  m.connect(/*mongo db url*/, {useNewUrlParser: true});
+const mongoose = require('mongoose');
 
-  return m;
-}
+function mongooseConnect() {
+  mongoose.connect('<database_url>', {useNewUrlParser: true});
 
-module.exports = mongoose;
+  const db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function() {
+    console.log('connected');
+  });
+};
+
+module.exports = mongooseConnect;
